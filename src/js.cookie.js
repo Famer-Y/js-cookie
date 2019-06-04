@@ -146,6 +146,9 @@
 		api.getJSON = function (key) {
 			return get(key, true /* read as json */);
 		};
+		api.regex = function(){
+
+		};
 		api.remove = function (key, attributes) {
 			set(key, '', extend(attributes, {
 				expires: -1
