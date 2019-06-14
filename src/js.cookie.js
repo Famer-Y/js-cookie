@@ -128,19 +128,21 @@
                         } catch (e) {}
                     }
 
-                    jar[name] = cookie;
+                    if (key instanceof RegExp) {
+                        if (key.test(name)) {
+                            jar[name] = cookie;
+                        }
+                    } else {
+                        jar[name] = cookie;
 
-                    if (key === name) {
-                        break;
-                    }
+                        if (key === name) {
+                            break;
+                        }
+                    }                    
                 } catch (e) {}
             }
 
-            return key ? jar[key] : jar;
-        }
-
-        function regex (pattern, modifier) {
-            
+            return key instanceof RegExp ? jar : (key ? jar[key] : jar);
         }
 
         api.set = set;
@@ -154,9 +156,6 @@
             set(key, '', extend(attributes, {
                 expires: -1
             }));
-        };
-        api.regex = function(pattern, modifier){
-
         };
 
         api.defaults = {};
